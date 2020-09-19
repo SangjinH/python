@@ -30,7 +30,7 @@ for i in coins:
         count += k//i
         k = k - i * (k//i)
 
-    if k == 0 :
+    if k == 0:
         break
 
 print(count)

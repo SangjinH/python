@@ -77,3 +77,73 @@ for i in range(1, n+1):
 # 따라서 전체시간 복잡도는 O(V^2) 입니다.
 # 일반적으로 5000개 이하라면 이 코드로 해결가능합니다.
 # 그러나 노드가 10,000개를 넘어가면 ?
+
+
+# 우선순위 큐 ( Priority Queue )
+# 우선순위가 가장 높은 데이터를 가장 먼저 삭제하는 자료구조
+# 예를 들어 여러개의 물건 데이터를 자료구조에 넣었다가 가치가 높은 물건데이터부터
+# 꺼내서 확인해야하는경우 우선순위 큐를 이용할 수 있음
+# 우선순위 큐를 구현하기 위해 사용하는 자료구조 중 하나 = HEAP ( 힙 )
+# 최소 힙 ( Min Heap ) 과 최대 힙 ( Max Heap )이 있음
+
+
+import heapq
+
+# 오름차순 Heap정렬
+def heapsort(iterable):
+    for value in iterable:
+        h = []
+        result = []
+        # 모든 원소를 차례대로 힙에 삽입
+        for value in iterable:
+            heapq.heappush(h, value)
+        #힙에 삽입된 모든 원소를 차례대로 꺼내어 담기
+        for i in range(len(h)):
+            result.append(heapq.heappop(h))
+        return result
+
+result = heapsort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0])
+print(result)
+
+
+##========================= 다익스트라 알고리즘 : 개선된 구현 방법
+# 단계마다 방문하지 않은 노드 중에서 최단거리가 가장 짧은 노드를 사용하기위해
+# 힙(Heap) 자료구조를 이용합니다.
+
+# 개선된 구현방법
+
+import sys
+input = sys.stdin.readline
+INF = int(1e9)
+
+n, m = map(int, input().split())
+start = int(input())
+graph = [[] for _ in range(n+1)]
+distance = [False] * (n+1)
+
+for _ in range(n+1):
+    a, b, c = map(int, input().split())
+    graph[a].append((b,c))
+
+def dijkstra(start):
+    q = []
+    heapq.heappush(q,(0,start))
+    distance[start] = 0
+    while q:
+        dist, now = heapq.heappop(q)
+        if distance[now] < dist:
+            continue
+
+        for i in graph[now]:
+            cost = dist + i[1]
+            if cost < distance[i[0]]:
+                distance[i[0]] = cost
+                heapq.heappush(q,(cost,i[0]))
+
+dijkstra(start)
+
+for i in range(1, n+1):
+    if distance[i] == INF:
+        print('INFINITY')
+    else:
+        print(distance[i])

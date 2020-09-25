@@ -12,4 +12,5 @@ for i in range(n):
     if num < s[i]:
         break
     num += s[i]
+
 print(num)

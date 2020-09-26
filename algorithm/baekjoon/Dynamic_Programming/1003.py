@@ -1,33 +1,22 @@
-# 백준 1003, 피보나치수열
+# 백준 1003 , 피보나치 수열
 import sys
 input = sys.stdin.readline
 
-global cnt_0
-global cnt_1
+def dp_fibo(x):
+    zero_count = [1, 0]
+    one_count = [0, 1]
+    if x <= 1:
+        return
 
+    for i in range(2,x+1):
+        zero_count.append(zero_count[i-1]+zero_count[i-2])
+        one_count.append(one_count[i-1]+one_count[i-2])
 
-def fibo(n):
-    global cnt_0
-    global cnt_1
+    return zero_count, one_count
 
-    if n == 0:
-        cnt_0 += 1
-        return 0
-    if n == 1:
-        cnt_1 += 1
-        return 1
+n = int(input().rstrip())
+zero_count, one_count = dp_fibo(40)
 
-    return fibo(n-1) + fibo(n-2)
-
-num = int(input().rstrip())
-result = []
-for _ in range(num):
-    cnt_0 = 0
-    cnt_1 = 0
-    fibo(int(input().rstrip()))
-    result.append([cnt_0, cnt_1])
-
-for i in range(len(result)):
-    for j in range(2):
-        print(result[i][j], end=' ')
-    print()
+for _ in range(n):
+    m = int(input().rstrip())
+    print("{} {}".format(zero_count[m], one_count[m]))

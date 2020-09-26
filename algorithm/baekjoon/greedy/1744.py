@@ -4,41 +4,33 @@ from collections import deque
 
 input = sys.stdin.readline
 
-nums = []
 n = int(input().rstrip())
 
 positives = []
 negatives = []
-zeros = []
-total = []
-
+zeros = 0
+ans = 0
 for i in range(n):
-    nums.append(int(input().rstrip()))
-    if 0 < i:
-        positives.append(i)
-    elif i < 0:
+    if i <= 0:
         negatives.append(i)
+    elif i == 1:
+        ans += 1
     else:
-        zeros.append(i)
+        positives.append(i)
 
-positive_q = deque(positives)
+negatives.sort()
+positives.sort(reverse=True)
 
-if positive_q[0] == 1:
-    total.append(positive_q.popleft())
-else:
-    while len(positive_q) < 2:
-        a = positive_q.popleft()
-        b = positive_q.popleft()
-        total.append(a*b)
+for i in range(0,len(negatives),2):
+    if i+1 < len(negatives):
+        ans += negatives[i]*negatives[i+1]
+    else:
+        ans += negatives[i]
 
-    if len(positive_q) == 1:
-        total.append(positive_q.popleft())
+for i in range(0, len(positives), 2):
+    if i+1 < len(positives):
+        ans += positives[i] + positives[i+1]
+    else:
+        ans += positives[i]
 
-if len(zeros) > 1 and len(negatives)
-
-
-negative_q = deque(negatives)
-while len(negative_q) < 2:
-    a = negative_q.pop()
-    b = negative_q.pop()
-    total.append(a*b)
+print(ans)

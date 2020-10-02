@@ -1,4 +1,5 @@
-# https://www.acmicpc.net/problem/15953
+# https://www.a
+# cmicpc.net/problem/15953
 # 상금헌터
 import sys
 input = sys.stdin.readline

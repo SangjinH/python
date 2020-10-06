@@ -30,7 +30,6 @@
 #     print(len(total)-1)
 
 import sys
-
 input = sys.stdin.readline
 from collections import deque
 
@@ -41,11 +40,10 @@ d = [0] * 100001
 q = deque([n])
 
 while True:
-    if n == k:
-        break
-
     num = q.popleft()
 
+    if num == k:
+        break
     if 0 <= num - 1 <= 100000 and d[num - 1] == 0:
         d[num - 1] = d[num] + 1
         q.append(num - 1)

@@ -7,6 +7,16 @@ from collections import deque
 n = int(input())
 
 
-texts = set()
+bigyo = input().rstrip()
 
-for i in range
+texts = []
+for _ in range(n-1):
+    texts.append(input().rstrip())
+
+result = []
+for i in range(n-1):
+    for j in range(len(texts[i])):
+        if bigyo[j] != texts[i][j]:
+            result.append("?")
+            continue
+        

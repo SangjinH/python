@@ -11,7 +11,7 @@ def count_by_range(array, left_value, right_value):
 n, m = map(int, input().split())
 array = list(map(int, input().split()))
 
-count = count_by_range(array, x, x)
+count = count_by_range(array, n, m)
 
 if count == 0:
     print(-1)

@@ -4,22 +4,19 @@ input = sys.stdin.readline
 
 word_list = list(input().split())
 
-firsts = []
+temp = ""
 for i in word_list:
-    firsts.append(i[0])
+    temp += i
 
 target = "UCPC"
 
-result = []
+results = []
 for i in target:
-    if i in firsts:
-        result.append(firsts.index(i))
-        del firsts[firsts.index(i)]
+    if i in temp:
+        results.append(temp.index(i))
+        temp = temp[temp.index(i):]
 
-if len(result) < 4:
-    print("I hate UCPC")
+if len(results) == 4:
+    print('I love UCPC')
 else:
-    if result == sorted(result):
-        print("I love UCPC")
-    else:
-        print("I hate UCPC")
+    print('I hate UCPC')

@@ -1,22 +1,30 @@
 # https://www.acmicpc.net/problem/1032
-# 백준 1032번, 구현, 명령 프롬프트
 import sys
 input = sys.stdin.readline
-from collections import deque
 
 n = int(input())
 
+paterns = []
 
-bigyo = input().rstrip()
+for _ in range(n):
+    paterns.append(input().rstrip())
 
-texts = []
-for _ in range(n-1):
-    texts.append(input().rstrip())
+bigyo = paterns[0]
 
-result = []
-for i in range(n-1):
-    for j in range(len(texts[i])):
-        if bigyo[j] != texts[i][j]:
-            result.append("?")
-            continue
-        
+paterns = paterns[1:]
+
+results = []
+for i in range(len(bigyo)):
+    cnt = 0
+    for j in range(len(paterns)):
+        if bigyo[i] == paterns[j][i]:
+           cnt += 1
+    if cnt == n-1:
+        results.append(bigyo[i])
+    else:
+        results.append('?')
+res = ''
+for i in results:
+    res += i
+
+print(res)
